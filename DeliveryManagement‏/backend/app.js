@@ -9,7 +9,7 @@ const app = express();
 const port = 5000;
 const mongoose = require('mongoose');
 // <<<<<<< HEAD
-const uri = "mongodb://localhost:27017/Events";//קישור למונגודיבי
+const uri = "mongodb://localhost:27017/Deliveries";//קישור למונגודיבי
 
 //const uri = "mongodb://localhost:27017/Events";
 // >>>>>>> 42d41d2e39b66a8d7bc5e01884aaee7ef21a2350
@@ -27,8 +27,9 @@ const options = cors.CorsOptions = {
 const router = express.Router();
 
 const customersRouter = require('./routes/customers');
-
-
+const adsRouter = require('./routes/ads');
+const citiesRouter = require('./routes/cities');
+const usersRouter = require('./routes/users');
 
 
 app.use(logger('dev'));
@@ -37,6 +38,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/customers', customersRouter);
+app.use('/ads', adsRouter);
+app.use('/cities', citiesRouter);
+app.use('/users', usersRouter);
 
 
 

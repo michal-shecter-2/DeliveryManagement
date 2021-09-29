@@ -1,53 +1,53 @@
 var express = require('express');
 var router = express.Router();
-const users = require("../Model/UsersModel");//חיבור למודל
-//הצגת כל המשתמשים
+const cities = require("../Model/CitiesModel");//חיבור למודל
+//הצגת כל הערים
 router.get('/', async (req, res, next) => {
     try {
-        const user = await users.find({});
-        res.send(user);
+        const city = await cities.find({});
+        res.send(city);
     }
     catch (arr) {
         res.send(err);
     }
 });
-//הוספת משתמש
+//הוספת עיר
 router.post('/post', async (req, res, next) => {
     try {
-        const user = await users.create(req.body);
-        res.send(user);
+        const city = await cities.create(req.body);
+        res.send(city);
     } catch (err) {
         next(err);
     }
 });
 
-//הוספת כמה משתמשים בו זמנית
+//הוספת כמה ערים בו זמנית
 router.post('/addMany', async (req, res, next) => {
     try {
-        const user = await users.insertMany(req.body);
-        res.send(user);
+        const city = await cities.insertMany(req.body);
+        res.send(city);
     }
     catch (err) {
         res.send(err)
     }
 });
 
-//מחיקת משתמש
+//מחיקת עיר
 router.delete('/delete/:id', async (req, res, next) => {
     try {
-        const user = await users.findOneAndDelete({ _id: req.params.id })
+        const city = await cities.findOneAndDelete({ _id: req.params.id })
         res.send("The object was successfully deleted")
     }
     catch (err) {
         res.send(err)
     }
 });
-//עדכון משתמש
+//עדכון עיר
 
 router.put('/put/:id', async (req, res, next) => {
     try {
-        const user = await users.findOneAndReplace({ _id: req.params.id }, req.body);
-        res.send(user);
+        const city = await cities.findOneAndReplace({ _id: req.params.id }, req.body);
+        res.send(city);
     }
     catch (err) {
         res.send(err)

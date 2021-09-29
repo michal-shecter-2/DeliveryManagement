@@ -5,29 +5,32 @@ const Schema = mongoose.Schema;
 const ads = new Schema(
     {
         usercode: {
-            type:Number
+            type: String
         },
         origincity: {
-            type:Number
+            type: String
         },
-        destinationcity:{
-            type:Number
+        destinationcity: {
+            type: String
+        },
+        cost: {
+            type: Number
         },
         uploaddate: {
-            type:Date,
-            default:Date.now
+            type: Date,
+            default: Date.now
         },
-        finaldate:{
-            type:Date,
-            default:Date.now
+        finaldate: {
+            type: Date,
+            default: Date.now
         },
-        deliveryperson:{
+        deliveryperson: {
             type: String
         },
-        note:{
+        note: {
             type: String
         },
-       
+
     },
     { collection: "ads" }
 );
