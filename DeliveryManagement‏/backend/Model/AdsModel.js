@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 
 const ads = new Schema(
     {
+
+        
         usercode: {
             type: String
         },
