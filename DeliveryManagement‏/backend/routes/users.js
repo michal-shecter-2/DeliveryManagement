@@ -4,7 +4,13 @@ const users = require("../Model/UsersModel");//חיבור למודל
 //הצגת כל המשתמשים
 router.get('/', async (req, res, next) => {
     try {
-        const user = await users.find({});
+        const user = await users.find({})
+            .populate([{
+                path: "citycode",
+                select: {
+                    name: 1
+                }
+            }]);
         res.send(user);
     }
     catch (arr) {

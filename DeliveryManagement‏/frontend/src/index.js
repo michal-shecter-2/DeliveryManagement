@@ -9,6 +9,7 @@ import SignUp from './components/SignUp';
 import Edit from './components/Edit';
 import Profile from './components/Profile2'
 import DataTableDemo from './components/DataTableDemo'
+import Ads from './components/Ads'
 ReactDOM.render(
 
   <div>
@@ -20,7 +21,8 @@ ReactDOM.render(
             <div><Link to='/SignUp'></Link></div>
             <div><Link to='/Edit'></Link></div>
             <div><Link to='/DataTableDemo'></Link></div>
-            <div><Link to='/Profile'></Link></div>‏
+            <div><Link to='/Profile'></Link></div>
+            <div><Link to='/Ads'></Link></div>‏
           </div>
 
         </div>
@@ -30,7 +32,8 @@ ReactDOM.render(
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
         <Route exact path="/DataTableDemo" component={DataTableDemo} />
-        <Route exact path="/Profile" component={Profile} />‏
+        <Route exact path="/Profile" component={Profile} />
+        <Route exact path="/Ads" component={Ads} />‏
       </Switch>
     </Router>
   </div >,

@@ -23,7 +23,8 @@ const users = new Schema(
             type: String
         },
         citycode: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'cities'
         },
         street: {
             type: String
