@@ -11,7 +11,7 @@ const users = new Schema(
             type: String
         },
         password:{
-            type:Number
+            type:string
         },
         email: {
             type: String
@@ -23,7 +23,7 @@ const users = new Schema(
             type:Number
         },
         citycode:{
-            type:Number
+            type:S
         },
        street:{
         type: String
