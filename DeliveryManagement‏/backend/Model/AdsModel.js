@@ -32,6 +32,12 @@ const ads = new Schema(
         note: {
             type: String
         },
+        size: {
+            type: Number
+        },
+        like: {
+            type: Number
+        },
 
     },
     { collection: "ads" }
