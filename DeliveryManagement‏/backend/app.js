@@ -25,8 +25,6 @@ const options = cors.CorsOptions = {
 };
 
 const router = express.Router();
-
-const customersRouter = require('./routes/customers');
 const adsRouter = require('./routes/ads');
 const citiesRouter = require('./routes/cities');
 const usersRouter = require('./routes/users');
@@ -36,8 +34,6 @@ app.use(logger('dev'));
 app.use(express.json());//מאפשר לקבל אוביקטים מסוג json
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use('/customers', customersRouter);
 app.use('/ads', adsRouter);
 app.use('/cities', citiesRouter);
 app.use('/users', usersRouter);
