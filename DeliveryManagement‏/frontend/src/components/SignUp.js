@@ -5,23 +5,30 @@ import './SignUp.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import swal from 'sweetalert';
 export default function SignUp() {
-    const [producer, setProducer] = useState({ id: 0, name: "", email: "", address: "", phone: "" })
-    const [name, setName] = useState({ name: "" })
-    const [email, setEmail] = useState({ email: "" })
+    const [user, setUser] = useState({ firstname: "", lastname: "", password: "", email: "", phone: "", mobilephone: "", citycode: "", street: "" })
+    const [firstname, setFirstname] = useState({ firstname: "" })
+    const [lastname, setLastname] = useState({ lastname: "" })
     const [password, setPassword] = useState({ password: "" })
+    const [email, setEmail] = useState({ email: "" })
     const [phone, setPhone] = useState({ phone: "" })
-    async function addProducer() {
-        const res = await axios.post('http://localhost:5000/Producers/post', {
+    const [mobilephone, setMobilephone] = useState({ mobilephone: "" })
+    const [citycode, setCitycode] = useState({ citycode: "" })
+    const [street, setStreet] = useState({ street: "" })
+    async function addUser() {
+        const res = await axios.post('http://localhost:5000/users/post', {
 
-            id: 5.0,
-            name: name,
+            firstname: firstname,
+            lastname: lastname,
             password: password,
             email: email,
             phone: phone,
+            mobilephone: mobilephone,
+            citycode: citycode,
+            street: street
         })
         if (res.status == 200) {
-            setProducer(res.data);
-            swal("wellcom " + res.data.name, "good luck in your job", "success")
+            setUser(res.data);
+            swal("wellcom " + res.data.firstname, "good luck in your job", "success")
         }
         else
 
@@ -30,13 +37,6 @@ export default function SignUp() {
 
     return (
         <div>
-            {/* { customer.map((item, index) => {
-                return (
-                    <div>
-                        <p>{item.name}</p>
-                    </div>
-                )
-            })} */}
 
             <div class="container-fluid">
 
@@ -63,16 +63,28 @@ export default function SignUp() {
                                                 <input id="inputPassword" type="password" placeholder="Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" onChange={e => { setPassword(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <input id="inputEmail" type="name" placeholder="name" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setName(e.target.value) }} />
+                                                <input id="inputFirstName" type="name" placeholder="first name" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setFirstname(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <input id="inputEmail" type="phone" placeholder="phone" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setPhone(e.target.value) }} />
+                                                <input id="inputLastName" type="name" placeholder="last name" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setLastname(e.target.value) }} />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <input id="inputPhone" type="phone" placeholder="phone" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setMobilephone(e.target.value) }} />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <input id="inputMobilePhone" type="phone" placeholder="mobile phone" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setPhone(e.target.value) }} />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <input id="inputCity" type="name" placeholder="city" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setCitycode(e.target.value) }} />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <input id="inputStreet" type="name" placeholder="street" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setStreet(e.target.value) }} />
                                             </div>
                                             <div class="custom-control custom-checkbox mb-3">
                                                 <input id="customCheck1" type="checkbox" checked class="custom-control-input" />
                                                 <label for="customCheck1" class="custom-control-label">Remember password</label>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm" onClick={e => addProducer()}>Sign Up</button>
+                                            <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm" onClick={e => addUser()}>Sign Up</button>
                                         </form>
                                     </div>
                                 </div>

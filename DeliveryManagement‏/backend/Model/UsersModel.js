@@ -10,23 +10,23 @@ const users = new Schema(
         lastname: {
             type: String
         },
-        password:{
-            type:string
+        password: {
+            type: String
         },
         email: {
             type: String
         },
-        phone:{
-            type:Number
+        phone: {
+            type: String
         },
-        mobilephone:{
-            type:Number
+        mobilephone: {
+            type: String
         },
-        citycode:{
-            type:S
+        citycode: {
+            type: String
         },
-       street:{
-        type: String
+        street: {
+            type: String
         },
     },
     { collection: "users" }

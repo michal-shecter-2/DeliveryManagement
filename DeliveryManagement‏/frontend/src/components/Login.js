@@ -6,52 +6,36 @@ import { HashRouter as Router, Route, Link, Switch, BrowserRouter } from 'react-
 import SignUp from './SignUp';
 import swal from 'sweetalert';
 export default function Login() {
-    const [customers, setCustomers] = useState([]);
-    const [producer, setProducer] = useState([]);//אותו צריך לשים רדיןס
+    const [users, setUsers] = useState([]);
+    const [user, setUser] = useState([]);//אותו צריך לשים רדיןס
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
-    function getAllCostumrs() {
-        return axios.get('http://localhost:5000/customers').then(res => res.data);
+    function getAllUsers() {
+        return axios.get('http://localhost:5000/users').then(res => res.data);
     }
-    // function getByEmail() {
-    //     return axios.get('http://localhost:5000/Producers/login', {
-    //         password: '12220011',
-    //         email: 'bashani@gmail.comr'
-    //     }
-    //     ).then(res => res.data);
-    // }
     async function getByEmail() {
-        const res = await axios.post('http://localhost:5000/Producers/login', {
+        const res = await axios.post('http://localhost:5000/users/login', {
             password: password,
             email: email
 
         });
 
         // return res.data;
-        if (res.data.name != null) {
-            swal("Hello " + res.data.name, "שמחים שחזרת אלינו", "success")
-            setProducer(res.data);
+        if (res.data.firstname != null) {
+            swal("Hello " + res.data.firstname, "שמחים שחזרת אלינו", "success")
+            setUser(res.data);
         }
         else
             swal({ title: "The email address or password you entered is incorrect", icon: "error" })
-        //alert(res.data.name)
     }
 
     useEffect(() => {
-        getAllCostumrs().then(data => setCustomers(data));
-        // getByEmail().then(data => setProducer(data));
+        getAllUsers().then(data => setUsers(data));
+
     }, []);
     return (
         <div>
-            <h3>{customers.length}</h3>
-            {/* <h3>{producer.name}</h3> */}
-            {/* { customer.map((item, index) => {
-                return (
-                    <div>
-                        <p>{item.name}</p>
-                    </div>
-                )
-            })} */}
+            <h3>{users.length}</h3>
 
             <div class="container-fluid">
                 <div class="row no-gutter">
