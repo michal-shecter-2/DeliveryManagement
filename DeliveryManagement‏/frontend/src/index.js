@@ -10,11 +10,12 @@ import Edit from './components/Edit';
 import Profile from './components/Profile2'
 import DataTableDemo from './components/DataTableDemo'
 import Ads from './components/Ads'
+import NavigationBar from './components/NavigationBar'
 ReactDOM.render(
 
   <div>
     <Router>
-      <React.StrictMode>
+      {/* <React.StrictMode>
         <div className="router">
           <div className="topnav">
             <div> <Link to='/'></Link></div>
@@ -26,14 +27,20 @@ ReactDOM.render(
           </div>
 
         </div>
-      </React.StrictMode>
+      </React.StrictMode> */}
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/SignUp" component={SignUp} />
+        {/* <Route exact path="/" component={Login} /> */}
+        {/* <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
         <Route exact path="/DataTableDemo" component={DataTableDemo} />
-        <Route exact path="/Profile" component={Profile} />
-        <Route exact path="/Ads" component={Ads} />‏
+        <Route exact path="/Profile" component={Profile} /> */}
+        <Route path="/" component={NavigationBar} />
+        <Route exact path="/SignUp" component={SignUp} />
+        <Route exact path="/Edit" component={Edit} />
+        <Route exact path="/Ads" component={Ads} />
+
+
+        ‏
       </Switch>
     </Router>
   </div >,
