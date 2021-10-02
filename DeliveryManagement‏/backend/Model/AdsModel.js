@@ -7,13 +7,16 @@ const ads = new Schema(
 
         
         usercode: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
         },
         origincity: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'cities'
         },
         destinationcity: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'cities'
         },
         cost: {
             type: Number
@@ -23,14 +26,20 @@ const ads = new Schema(
             default: Date.now
         },
         finaldate: {
-            type: Date,
-            default: Date.now
+            type: Date
         },
         deliveryperson: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
         },
         note: {
             type: String
+        },
+        size: {
+            type: Number
+        },
+        like: {
+            type: Number
         },
 
     },
