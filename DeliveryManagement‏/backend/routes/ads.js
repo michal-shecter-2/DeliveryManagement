@@ -4,8 +4,34 @@ const ads = require("../Model/AdsModel");//חיבור למודל
 //הצגת כל המודעות
 router.get('/', async (req, res, next) => {
     try {
-        const ad = await ads.find({});
-        res.send(ad);
+        const ad = await ads.find({})
+            .populate([{
+                path: "origincity",
+                select: {
+                    name: 1
+                }
+            }])
+            .populate([{
+                path: "destinationcity",
+                select: {
+                    name: 1
+                }
+            }])
+            .populate([{
+                path: "usercode",
+                select: {
+                    firstname: 1,
+                    lastname: 1
+                }
+                // .populate([{
+                //     path: "deliveryperson",
+                //     select: {
+                //         firstname: 1,
+                //         lastname: 1
+                //     }
+                // }])
+            }]);
+        res.send(ad)
     }
     catch (arr) {
         res.send(err);
