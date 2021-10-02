@@ -22,23 +22,10 @@ export default function NavigationBar() {
                     </ul>
                 </div>
             </nav>
-            <Switch>
-                <Route exact path="/" component={Login} />
-                <Route exact path="/Edit" component={Edit} />
-                <Route exact path="/Ads" component={Ads} />
-
-            </Switch>
-        </div>
-<<<<<<< HEAD
-    </nav>
-    <Switch> 
+            <Switch> 
         <Route exact path="/" component={Login} />
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
     </Switch>
-</div>
-);
-=======
-    );
->>>>>>> db9c39a3e830aa6b769b13ac089aecf5f9ec3e83
-}
+    </div>
+)}

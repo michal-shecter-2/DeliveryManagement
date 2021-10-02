@@ -35,15 +35,6 @@ ReactDOM.render(
         <Route exact path="/DataTableDemo" component={DataTableDemo} />
         <Route exact path="/Profile" component={Profile} /> */}
         <Route path="/" component={NavigationBar} />
-<<<<<<< HEAD
-=======
-        <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/Edit" component={Edit} />
-        <Route exact path="/Ads" component={Ads} />
-
-
-        ‏
->>>>>>> db9c39a3e830aa6b769b13ac089aecf5f9ec3e83
       </Switch>
     </Router>
   </div >,
