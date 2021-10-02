@@ -9,11 +9,25 @@ import SignUp from './components/SignUp';
 import Edit from './components/Edit';
 import Profile from './components/Profile2'
 import DataTableDemo from './components/DataTableDemo'
+import Ads from './components/Ads'
 import NavigationBar from './components/NavigationBar'
 ReactDOM.render(
 
   <div>
     <Router>
+      {/* <React.StrictMode>
+        <div className="router">
+          <div className="topnav">
+            <div> <Link to='/'></Link></div>
+            <div><Link to='/SignUp'></Link></div>
+            <div><Link to='/Edit'></Link></div>
+            <div><Link to='/DataTableDemo'></Link></div>
+            <div><Link to='/Profile'></Link></div>
+            <div><Link to='/Ads'></Link></div>‏
+          </div>
+
+        </div>
+      </React.StrictMode> */}
       <Switch>
         {/* <Route exact path="/" component={Login} /> */}
         {/* <Route exact path="/SignUp" component={SignUp} />
@@ -23,8 +37,10 @@ ReactDOM.render(
         <Route path="/" component={NavigationBar} />
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
+        <Route exact path="/Ads" component={Ads} />
 
-‏
+
+        ‏
       </Switch>
     </Router>
   </div >,
