@@ -21,10 +21,6 @@ ReactDOM.render(
         <Route exact path="/DataTableDemo" component={DataTableDemo} />
         <Route exact path="/Profile" component={Profile} /> */}
         <Route path="/" component={NavigationBar} />
-        <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/Edit" component={Edit} />
-
-‏
       </Switch>
     </Router>
   </div >,

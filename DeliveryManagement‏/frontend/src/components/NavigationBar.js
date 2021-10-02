@@ -23,6 +23,8 @@ return(
     </nav>
     <Switch> 
         <Route exact path="/" component={Login} />
+        <Route exact path="/SignUp" component={SignUp} />
+        <Route exact path="/Edit" component={Edit} />
     </Switch>
 </div>
 );
