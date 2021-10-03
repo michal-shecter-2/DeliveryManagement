@@ -6,6 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import swal from 'sweetalert';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+import ReactDOM from 'react-dom';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
 export default function Ads() {
     const [ads, setAds] = useState([]);
     function getAllAds() {
@@ -20,8 +27,36 @@ export default function Ads() {
         var day = new Date(day);
         var dayName = day.toLocaleDateString();
         return dayName;
-    }
-
+    };
+        const [displayResponsive, setDisplayResponsive] = useState(false);
+        const [position, setPosition] = useState('center');
+    
+        const dialogFuncMap = {
+        
+            'displayResponsive': setDisplayResponsive
+        }
+    
+        const onClick = (name, position) => {
+            dialogFuncMap[`${name}`](true);
+    
+            if (position) {
+                setPosition(position);
+            }
+        }
+    
+        const onHide = (name) => {
+            dialogFuncMap[`${name}`](false);
+        }
+    
+        const renderFooter = (name) => {
+            return (
+                <div>
+                    <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
+                    <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
+                </div>
+            );
+            }
+    
     return (
         <div>
             <div class="container mt-5 mb-5">
@@ -45,9 +80,21 @@ export default function Ads() {
                                     <div class="d-flex justify-content-between stats">
                                         <div><i class="fa fa-calendar-o"></i><span class="ml-2">until: {convertDay(item.finaldate)}</span></div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <div class="profiles"><img class="rounded-circle" src="https://i.imgur.com/4nUVGjW.jpg" width="30" /><img class="rounded-circle" src=" https://i.imgur.com/GHCtqgp.jpg" width="30" /><img class="rounded-circle" src="https://i.imgur.com/UL0GS75.jpg" width="30" /></div><span class="ml-3">12</span>
+                                            <div class="profiles">
+                                            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
+                <h5 class="mt-2"><b>Delivery from {item.origincity.name} to {item.destinationcity.name}</b></h5>
+                <h5 class="mt-2"><b>sender's details‏:</b></h5>
+                <h5 class="mt-2">{item.usercode.firstname} {item.usercode.lastname}</h5>
+                <h5 class="mt-2">phone: {item.usercode.phone}</h5>
+                <h5 class="mt-2">mobilephone: {item.usercode.mobilephone}</h5>
+                <h5 class="mt-2">email: {item.usercode.email}</h5>
+              <label for="birthdaytime">Interested in picking up the shipment on date and time:</label>
+  <input type="datetime-local" id="birthdaytime" name="birthdaytime"/>
+                </Dialog></div>
                                         </div>
                                     </div>
+                
                                 </div>
                             </div>
                         )
@@ -68,62 +115,7 @@ export default function Ads() {
                         </ul>
                     </nav>
                 </div>
-
-                <div class="container d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="Modal_button"> Open modal </button>
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-
-                                <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">&times;</button> </div>
-                                <div class="modal-body mb-0 pb-0 mt-0">
-                                    <div class="container ">
-
-                                        <div class="holder">
-                                            <div class="row mb-1">
-                                                <div class="col">
-                                                    <h2>Choose File Types</h2>
-                                                </div>
-                                            </div>
-                                            <form action="#" class="customRadio customCheckbox m-0 p-0">
-                                                <div class="row mb-0">
-                                                    <div class="row justify-content-start">
-                                                        <div class="col-12">
-                                                            <div class="row"> <input type="radio" name="textEditor" id="dreamweaver" checked /> <label for="dreamweaver">Back up all files folders</label> </div>
-                                                            <div class="row"> <input type="radio" name="textEditor" id="sublime" /> <label for="sublime">Back up photos and videos</label> </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-0 ml-4">
-                                                    <div class="col-12 my_checkbox ">
-                                                        <div class="row"> <input type="checkbox" id="screenshots" checked /> <label for="javascript" id="screenshots_label">Back up screenshots</label> </div>
-                                                        <div class="row"> <input type="checkbox" id="RAW" /> <label for="RAW">Back up RAW files</label> </div>
-                                                        <div class="row"> <input type="checkbox" id="Library" /> <label for="Library">Back up Photos Library metadata</label> </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-4">
-                                                    <div class="col-12 Advanced_setting">
-
-                                                        <b> <a class="Advanced_setting" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> Advanced setting &nbsp;<i class="icon-action fa fa-chevron-down"></i> </a></b>  Advanced Setting &nbsp;<i class="icon-action fa fa-chevron-down"></i> </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer pt-0 mt-0 pb-5 pr-6 m-1 ">
-                                    <div class="col-2"> </div>
-                                    <div class="col-6 justify-content-start"> <a href="#" id="modal_footer_support" data-toggle="popover" title="Support" data-content="Support Message" class="modal_footer"><i class="fa fa-question-circle-o modal_footer" aria-hidden="true"></i> <span class="modal_footer">Support</span> </a> </div>
-                                    <div class="col-2 justify-content-end ">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  <button type="button" class="btn btn-outline-light modal_footer" data-dismiss="modal">Cancel</button> </div>
-                                    <div class="col-2 justify-content-start m-0 p-0"> <button type="button" class="btn btn-success box-shadow--16dp" data-dismiss="modal">OK</button> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-
         </div>
     )
 }
