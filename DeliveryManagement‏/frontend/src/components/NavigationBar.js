@@ -8,8 +8,7 @@ import SignUp from './SignUp';
 import AddShipping from './AddShipping';
 import Edit from './Edit';
 import Ads from './Ads'
-
-
+import Email from './Email'
 export default function NavigationBar() {
     return (
         <div class="container-fluid px-0">

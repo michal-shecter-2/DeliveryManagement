@@ -4,7 +4,12 @@ import Pet from './Pet'
 import './SignUp.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import swal from 'sweetalert';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { IComboBoxStyles, SelectableOptionMenuItemType, IButtonStyles, } from '@fluentui/react';
+import { ComboBox, findIndex, IComboBox, IComboBoxOption, on, htmlElementProperties, Checkbox, ChoiceGroupBase } from 'office-ui-fabric-react';
+import TextField from '@material-ui/core/TextField';
 export default function SignUp() {
+    const [cities, setCities] = useState([]);
     const [user, setUser] = useState({ firstname: "", lastname: "", password: "", email: "", phone: "", mobilephone: "", citycode: "", street: "" })
     const [firstname, setFirstname] = useState({ firstname: "" })
     const [lastname, setLastname] = useState({ lastname: "" })
@@ -14,9 +19,13 @@ export default function SignUp() {
     const [mobilephone, setMobilephone] = useState({ mobilephone: "" })
     const [citycode, setCitycode] = useState({ citycode: "" })
     const [street, setStreet] = useState({ street: "" })
+    const [options, setOptions] = useState([]);
+    function getAllCities() {
+        return axios.get('http://localhost:5000/cities').then(res => res.data);
+    }
+
     async function addUser() {
         const res = await axios.post('http://localhost:5000/users/post', {
-
             firstname: firstname,
             lastname: lastname,
             password: password,
@@ -34,6 +43,19 @@ export default function SignUp() {
 
             swal({ title: "Opssssss try again", icon: "error" })
     };
+    function findcity(cityname) {
+        let filtercity = cities.find(item => item.name == cityname);
+        if (filtercity != undefined) {
+            setCitycode(filtercity._id);
+        }
+
+
+    }
+    useEffect(() => {
+        getAllCities().then(data => setCities(data))
+            .then(cities.map((i, item) => options.push({ key: 0, text: i.name })))
+            ;
+    }, []);
 
     return (
         <div>
@@ -75,7 +97,15 @@ export default function SignUp() {
                                                 <input id="inputMobilePhone" type="phone" placeholder="mobile phone" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setPhone(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <input id="inputCity" type="name" placeholder="city" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setCitycode(e.target.value) }} />
+                                                <Autocomplete
+                                                    className="priority"
+                                                    id="Food"
+                                                    options={options}
+                                                    getOptionLabel={(option) => option.text}
+                                                    style={{ width: 300 }}
+                                                    renderInput={(params) => <TextField {...params} label=" עירבחר" variant="outlined" />}
+                                                    onChange={(e, value) => { findcity(value.text) }}
+                                                />
                                             </div>
                                             <div class="form-group mb-3">
                                                 <input id="inputStreet" type="name" placeholder="street" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setStreet(e.target.value) }} />
@@ -89,11 +119,10 @@ export default function SignUp() {
                                     </div>
                                 </div>
                             </div>
-                            {/* <!-- End --> */}
 
                         </div>
                     </div>
-                    {/* <!-- End --> */}
+
 
                 </div>
             </div>

@@ -21,7 +21,10 @@ router.get('/', async (req, res, next) => {
                 path: "usercode",
                 select: {
                     firstname: 1,
-                    lastname: 1
+                    lastname: 1,
+                    email:1,
+                    phone:1,
+                    mobilephone:1
                 }
                 // .populate([{
                 //     path: "deliveryperson",
