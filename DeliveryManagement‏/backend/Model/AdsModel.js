@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ads = new Schema(
     {
 
-        
+
         usercode: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users'
@@ -36,7 +36,7 @@ const ads = new Schema(
             type: String
         },
         size: {
-            type: Number
+            type: String
         },
         like: {
             type: Number
