@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './Login';
 import { Switch, Route } from 'react-router-dom';
 import SignUp from './SignUp';
+import AddShipping from './AddShipping';
 import Edit from './Edit';
 import Ads from './Ads'
+
 
 export default function NavigationBar() {
     return (
@@ -17,7 +19,7 @@ export default function NavigationBar() {
                         <li class="nav-item"> <a class="nav-link" href="#/">התחברות</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#/Edit">אזור אישי</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#/Ads">דף הבית</a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#/b">הוספת משלוח</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#/AddShipping">הוספת משלוח</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#/c">סוכן חכם למייל</a> </li>
                     </ul>
                 </div>
@@ -26,6 +28,7 @@ export default function NavigationBar() {
         <Route exact path="/" component={Login} />
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
+        <Route exact path="/AddShipping" component={AddShipping}/>
     </Switch>
     </div>
 )}
