@@ -1,0 +1,1 @@
+mongoimport --type csv  -c cities --headerline --drop C:\Downloads\cities.csv

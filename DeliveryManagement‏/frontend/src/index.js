@@ -10,6 +10,8 @@ import Edit from './components/Edit';
 import Profile from './components/Profile2'
 import DataTableDemo from './components/DataTableDemo'
 import Ads from './components/Ads'
+import Email from './components/Email'
+import New from './components/N'
 import NavigationBar from './components/NavigationBar'
 ReactDOM.render(
 
@@ -38,9 +40,8 @@ ReactDOM.render(
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
         <Route exact path="/Ads" component={Ads} />
-
-
-        ‏
+        <Route exact path="/Email" component={Email} />
+        ‏  <Route exact path="/N" component={New} />
       </Switch>
     </Router>
   </div >,

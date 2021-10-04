@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import SignUp from './SignUp';
 import Edit from './Edit';
 import Ads from './Ads'
-
+import Email from './Email'
 export default function NavigationBar() {
     return (
         <div class="container-fluid px-0">
@@ -26,7 +26,7 @@ export default function NavigationBar() {
                 <Route exact path="/" component={Login} />
                 <Route exact path="/Edit" component={Edit} />
                 <Route exact path="/Ads" component={Ads} />
-
+                <Route exact path="/c" component={Email} />
             </Switch>
         </div>
     );
