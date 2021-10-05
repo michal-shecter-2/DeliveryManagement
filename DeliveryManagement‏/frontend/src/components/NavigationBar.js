@@ -27,6 +27,7 @@ export default function NavigationBar() {
         <Route exact path="/" component={Login} />
         <Route exact path="/SignUp" component={SignUp} />
         <Route exact path="/Edit" component={Edit} />
+        <Route exact path="/Ads" component={Ads} />
         <Route exact path="/AddShipping" component={AddShipping}/>
     </Switch>
     </div>
