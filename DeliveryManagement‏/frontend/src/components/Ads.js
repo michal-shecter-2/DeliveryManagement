@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Pet from './Pet'
 import './Ads.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Popup from 'reactjs-popup';
+//import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import swal from 'sweetalert';
 import 'primeicons/primeicons.css';
@@ -28,35 +27,35 @@ export default function Ads() {
         var dayName = day.toLocaleDateString();
         return dayName;
     };
-        const [displayResponsive, setDisplayResponsive] = useState(false);
-        const [position, setPosition] = useState('center');
-    
-        const dialogFuncMap = {
-        
-            'displayResponsive': setDisplayResponsive
+    const [displayResponsive, setDisplayResponsive] = useState(false);
+    const [position, setPosition] = useState('center');
+
+    const dialogFuncMap = {
+
+        'displayResponsive': setDisplayResponsive
+    }
+
+    const onClick = (name, position) => {
+        dialogFuncMap[`${name}`](true);
+
+        if (position) {
+            setPosition(position);
         }
-    
-        const onClick = (name, position) => {
-            dialogFuncMap[`${name}`](true);
-    
-            if (position) {
-                setPosition(position);
-            }
-        }
-    
-        const onHide = (name) => {
-            dialogFuncMap[`${name}`](false);
-        }
-    
-        const renderFooter = (name) => {
-            return (
-                <div>
-                    <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
-                    <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
-                </div>
-            );
-            }
-    
+    }
+
+    const onHide = (name) => {
+        dialogFuncMap[`${name}`](false);
+    }
+
+    const renderFooter = (name) => {
+        return (
+            <div>
+                <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
+            </div>
+        );
+    }
+
     return (
         <div>
             <div class="container mt-5 mb-5">
@@ -81,20 +80,22 @@ export default function Ads() {
                                         <div><i class="fa fa-calendar-o"></i><span class="ml-2">until: {convertDay(item.finaldate)}</span></div>
                                         <div class="d-flex flex-row align-items-center">
                                             <div class="profiles">
-                                            <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
-                <Dialog header="Header" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{'960px': '75vw'}} style={{width: '50vw'}} footer={renderFooter('displayResponsive')}>
-                <h5 class="mt-2"><b>Delivery from {item.origincity.name} to {item.destinationcity.name}</b></h5>
-                <h5 class="mt-2"><b>sender's details‏:</b></h5>
-                <h5 class="mt-2">{item.usercode.firstname} {item.usercode.lastname}</h5>
-                <h5 class="mt-2">phone: {item.usercode.phone}</h5>
-                <h5 class="mt-2">mobilephone: {item.usercode.mobilephone}</h5>
-                <h5 class="mt-2">email: {item.usercode.email}</h5>
-              <label for="birthdaytime">Interested in picking up the shipment on date and time:</label>
-  <input type="datetime-local" id="birthdaytime" name="birthdaytime"/>
-                </Dialog></div>
+                                                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
+                                                <Dialog header="Details" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
+                                                    <h5 class="mt-2"><b>Delivery from {item.origincity.name} to {item.destinationcity.name}</b></h5>
+                                                    <h5 class="mt-2"><b>payment:{item.cost}, {item.size} devilery</b></h5>
+                                                    <br />
+                                                    <h5 class="mt-2"><b>sender's details‏:</b></h5>
+                                                    <h5 class="mt-2">{item.usercode.firstname} {item.usercode.lastname}</h5>
+                                                    <h5 class="mt-2">phone: {item.usercode.phone}</h5>
+                                                    <h5 class="mt-2">mobilephone: {item.usercode.mobilephone}</h5>
+                                                    <h5 class="mt-2">email: {item.usercode.email}</h5>
+                                                    <label for="birthdaytime">Interested in picking up the shipment on date and time:</label>
+                                                    <input type="datetime-local" id="birthdaytime" name="birthdaytime" />
+                                                </Dialog></div>
                                         </div>
                                     </div>
-                
+
                                 </div>
                             </div>
                         )
