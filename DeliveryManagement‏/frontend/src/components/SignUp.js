@@ -55,11 +55,11 @@ export default function SignUp() {
             setCitycode(filtercity._id);
         }
     }
-    function onClickPriority(eve) {
-        if (eve && eve.key && eve.text) {
-            setTmp(eve?.text)
-        }
-    }
+    // function onClickPriority(eve) {
+    //     if (eve && eve.key && eve.text) {
+    //         setTmp(eve?.text)
+    //     }
+    // }
     useEffect(async () => {
         let data = await getAllCities();
         data.map(i => cities.push(i))
@@ -118,7 +118,7 @@ export default function SignUp() {
                                                     getOptionLabel={(option) => option.text}
                                                     style={{ width: 300 }}
                                                     renderInput={(params) => <TextField {...params} label=" עיר  בחר" variant="outlined" />}
-                                                    onChange={(e, value) => { onClickPriority(value) }}
+                                                // onChange={(e, value) => { onClickPriority(value) }}
                                                 />
                                             </div>
                                             <div class="form-group mb-3">
