@@ -7,7 +7,6 @@ import { Switch, Route } from 'react-router-dom';
 import SignUp from './SignUp';
 import Edit from './Edit';
 import Ads from './Ads'
-
 export default function NavigationBar() {
     return (
         <div class="container-fluid px-0">

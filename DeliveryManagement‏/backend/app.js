@@ -6,7 +6,7 @@ const logger = require('morgan');
 
 const cors = require('cors');
 const app = express();
-const port = 5000;
+const port = 4000;
 const mongoose = require('mongoose');
 // <<<<<<< HEAD
 const uri = "mongodb://localhost:27017/Deliveries";//קישור למונגודיבי

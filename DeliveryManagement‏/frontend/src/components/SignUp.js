@@ -19,13 +19,19 @@ export default function SignUp() {
     const [mobilephone, setMobilephone] = useState({ mobilephone: "" })
     const [citycode, setCitycode] = useState({ citycode: "" })
     const [street, setStreet] = useState({ street: "" })
-    const [options, setOptions] = useState([]);
-    function getAllCities() {
-        return axios.get('http://localhost:5000/cities').then(res => res.data);
+    const [options, setOptions] = useState([])
+    async function getAllCities() {
+        let arr = [];
+        await axios.post('https://countriesnow.space/api/v0.1/countries/cities', {
+            "country": "israel"
+        })
+            .then(res => res.data.data.map(i => arr.push(i)));
+
+        return arr;
     }
 
     async function addUser() {
-        const res = await axios.post('http://localhost:5000/users/post', {
+        const res = await axios.post('http://localhost:4005/users/post', {
             firstname: firstname,
             lastname: lastname,
             password: password,
@@ -48,13 +54,21 @@ export default function SignUp() {
         if (filtercity != undefined) {
             setCitycode(filtercity._id);
         }
-
-
     }
-    useEffect(() => {
-        getAllCities().then(data => setCities(data))
-            .then(cities.map((i, item) => options.push({ key: 0, text: i.name })))
-            ;
+    function onClickPriority(eve) {
+        if (eve && eve.key && eve.text) {
+            setTmp(eve?.text)
+        }
+    }
+    useEffect(async () => {
+        let data = await getAllCities();
+        data.map(i => cities.push(i))
+        cities.map((i, item) => options.push({ key: item, text: i }))
+        // this.state.Food.map((item => this.options.push({ key: item.Code, text: item.FoodName })));
+        // getAllCities().then(data => setCities(data))
+        //     .then(cities.map((i, item) => options.push({ key: item, text: i.name })))
+        //     ;
+        //op.map((i, item) => options.push({ key: item.id, text: i.name }))
     }, []);
 
     return (
@@ -103,8 +117,8 @@ export default function SignUp() {
                                                     options={options}
                                                     getOptionLabel={(option) => option.text}
                                                     style={{ width: 300 }}
-                                                    renderInput={(params) => <TextField {...params} label=" עירבחר" variant="outlined" />}
-                                                    onChange={(e, value) => { findcity(value.text) }}
+                                                    renderInput={(params) => <TextField {...params} label=" עיר  בחר" variant="outlined" />}
+                                                    onChange={(e, value) => { onClickPriority(value) }}
                                                 />
                                             </div>
                                             <div class="form-group mb-3">
