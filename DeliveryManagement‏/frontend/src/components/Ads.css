@@ -29,4 +29,9 @@ body {
 .dialog-demo .p-dialog .p-button {
     min-width: 6rem;
 }
-                
+.autocomplate{
+    /* display: flex;
+  flex-direction: row; */
+    /* margin-right: 2vw; */
+    /* margin-left: 47vw; */
+}            

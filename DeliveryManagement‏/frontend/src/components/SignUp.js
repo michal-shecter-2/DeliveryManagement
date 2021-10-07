@@ -20,6 +20,7 @@ export default function SignUp() {
     const [citycode, setCitycode] = useState({ citycode: "" })
     const [street, setStreet] = useState({ street: "" })
     const [options, setOptions] = useState([])
+
     async function getAllCities() {
         let arr = [];
         await axios.post('https://countriesnow.space/api/v0.1/countries/cities', {
@@ -31,7 +32,7 @@ export default function SignUp() {
     }
 
     async function addUser() {
-        const res = await axios.post('http://localhost:4005/users/post', {
+        const res = await axios.post('http://localhost:4000/users/post', {
             firstname: firstname,
             lastname: lastname,
             password: password,
@@ -49,26 +50,10 @@ export default function SignUp() {
 
             swal({ title: "Opssssss try again", icon: "error" })
     };
-    function findcity(cityname) {
-        let filtercity = cities.find(item => item.name == cityname);
-        if (filtercity != undefined) {
-            setCitycode(filtercity._id);
-        }
-    }
-    // function onClickPriority(eve) {
-    //     if (eve && eve.key && eve.text) {
-    //         setTmp(eve?.text)
-    //     }
-    // }
     useEffect(async () => {
         let data = await getAllCities();
         data.map(i => cities.push(i))
         cities.map((i, item) => options.push({ key: item, text: i }))
-        // this.state.Food.map((item => this.options.push({ key: item.Code, text: item.FoodName })));
-        // getAllCities().then(data => setCities(data))
-        //     .then(cities.map((i, item) => options.push({ key: item, text: i.name })))
-        //     ;
-        //op.map((i, item) => options.push({ key: item.id, text: i.name }))
     }, []);
 
     return (
@@ -118,7 +103,7 @@ export default function SignUp() {
                                                     getOptionLabel={(option) => option.text}
                                                     style={{ width: 300 }}
                                                     renderInput={(params) => <TextField {...params} label=" עיר  בחר" variant="outlined" />}
-                                                // onChange={(e, value) => { onClickPriority(value) }}
+                                                    onChange={(e, value) => { setCitycode(value.text) }}
                                                 />
                                             </div>
                                             <div class="form-group mb-3">

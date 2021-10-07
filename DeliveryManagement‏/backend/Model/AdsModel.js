@@ -11,12 +11,14 @@ const ads = new Schema(
             ref: 'users'
         },
         origincity: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'cities'
+            type: String,
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'cities'
         },
         destinationcity: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'cities'
+            type: String,
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'cities'
         },
         cost: {
             type: Number

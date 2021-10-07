@@ -11,10 +11,10 @@ export default function Login() {
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
     function getAllUsers() {
-        return axios.get('http://localhost:5000/users').then(res => res.data);
+        return axios.get('http://localhost:4000/users').then(res => res.data);
     }
     async function getByEmail() {
-        const res = await axios.post('http://localhost:5000/users/login', {
+        const res = await axios.post('http://localhost:4000/users/login', {
             password: password,
             email: email
 

@@ -5,12 +5,12 @@ const users = require("../Model/UsersModel");//חיבור למודל
 router.get('/', async (req, res, next) => {
     try {
         const user = await users.find({})
-            .populate([{
-                path: "citycode",
-                select: {
-                    name: 1
-                }
-            }]);
+        // .populate([{
+        //     path: "citycode",
+        //     select: {
+        //         name: 1
+        //     }
+        // }]);
         res.send(user);
     }
     catch (arr) {

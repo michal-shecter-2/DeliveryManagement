@@ -5,26 +5,26 @@ const ads = require("../Model/AdsModel");//חיבור למודל
 router.get('/', async (req, res, next) => {
     try {
         const ad = await ads.find({})
-            .populate([{
-                path: "origincity",
-                select: {
-                    name: 1
-                }
-            }])
-            .populate([{
-                path: "destinationcity",
-                select: {
-                    name: 1
-                }
-            }])
+            // .populate([{
+            //     path: "origincity",
+            //     select: {
+            //         name: 1
+            //     }
+            // }])
+            // .populate([{
+            //     path: "destinationcity",
+            //     select: {
+            //         name: 1
+            //     }
+            // }])
             .populate([{
                 path: "usercode",
                 select: {
                     firstname: 1,
                     lastname: 1,
-                    email:1,
-                    phone:1,
-                    mobilephone:1
+                    email: 1,
+                    phone: 1,
+                    mobilephone: 1
                 }
                 // .populate([{
                 //     path: "deliveryperson",
