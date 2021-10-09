@@ -8,7 +8,8 @@ export default function Email() {
 
   function sendEmail (e) {
     e.preventDefault();
-    emailjs.sendForm('service_qnr0dl8', 'template_s98wtcm', e.target, 'user_AtCvQirmDgj0fe5PSyWxp')
+    // 'service_qnr0dl8', 'template_s98wtcm', e.target, 'user_AtCvQirmDgj0fe5PSyWxp'
+    emailjs.sendForm('service_zgbq1bg', 'template_xu2rhdm', e.target, 'user_ac0cNQmyItElKr7m2Cav0')
       .then((result) => {
           console.log(result.text);
       }, (error) => {

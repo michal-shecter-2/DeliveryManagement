@@ -28,7 +28,7 @@ const router = express.Router();
 const adsRouter = require('./routes/ads');
 const citiesRouter = require('./routes/cities');
 const usersRouter = require('./routes/users');
-
+const sendemailRouter = require('./routes/email');
 
 app.use(logger('dev'));
 app.use(express.json());//מאפשר לקבל אוביקטים מסוג json
@@ -37,20 +37,12 @@ app.use(cookieParser());
 app.use('/ads', adsRouter);
 app.use('/cities', citiesRouter);
 app.use('/users', usersRouter);
-
+app.use('/email', sendemailRouter);
 
 
 app.use(cors(options))
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
