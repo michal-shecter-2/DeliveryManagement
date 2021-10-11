@@ -12,18 +12,34 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
+import store from './Store';
+import { loginuser,sighnupuser } from './actions';
 export default function Edit() {
-    const [user, setUser] = useState({
-        _id: "6158c552d2d426b1e7672b93",
-        firstname: "ayla",
-        lastname: "ryneman",
-        password: "000111333",
-        email: "ar@gmail.com",
-        phone: "026524187",
-        mobilephone: "0533105981",
-        citycode: "6154653b288ae9f3359e7a60",
-        street: "bear yitzhak"
-    })
+    // const [user, setUser] = useState({
+    //     _id: "6158c552d2d426b1e7672b93",
+    //     firstname: "ayla",
+    //     lastname: "ryneman",
+    //     password: "000111333",
+    //     email: "ar@gmail.com",
+    //     phone: "026524187",
+    //     mobilephone: "0533105981",
+    //     citycode: "6154653b288ae9f3359e7a60",
+    //     street: "bear yitzhak"
+    // })
+
+
+      // const [user, setUser] = useState({
+    //     _id: "6158c552d2d426b1e7672b93",
+    //     firstname: "ayla",
+    //     lastname: "ryneman",
+    //     password: "000111333",
+    //     email: "ar@gmail.com",
+    //     phone: "026524187",
+    //     mobilephone: "0533105981",
+    //     citycode: "6154653b288ae9f3359e7a60",
+    //     street: "bear yitzhak"
+    // })
+     const [user, setUser] = useState( store.getState().user )
     const [cities, setCities] = useState([]);
     const [firstname, setFirstname] = useState({ firstname: "" })
     const [lastname, setLastname] = useState({ lastname: "" })
@@ -99,12 +115,12 @@ export default function Edit() {
                                 <h6 class="text-right">Edit Profile</h6>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6"><input type="text" class="form-control" placeholder="first name" onChange={e => { setFirstname(e.target.value) }} /></div>
-                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Doe" onChange={e => { setLastname(e.target.value) }} /></div>
+                                <div class="col-md-6"><input type="text" class="form-control" placeholder="first name" defaultValue={user.firstname} onChange={e => { setFirstname(e.target.value) }} /></div>
+                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Doe"  defaultValue={user.lastname} onChange={e => { setLastname(e.target.value) }} /></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Email" onChange={e => { setEmail(e.target.value) }} /></div>
-                                <div class="col-md-6"><input id="inputPassword" type="password" placeholder="Password" class="form-control" onChange={e => { setPassword(e.target.value) }} /></div>
+                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Email"  defaultValue={user.email} onChange={e => { setEmail(e.target.value) }} /></div>
+                                <div class="col-md-6"><input id="inputPassword" type="password" placeholder="Password"  defaultValue={user.password} class="form-control" onChange={e => { setPassword(e.target.value) }} /></div>
                             </div>
                             <div class="row mt-3">
                                 <Autocomplete
@@ -116,12 +132,12 @@ export default function Edit() {
                                     renderInput={(params) => <TextField {...params} label=" עיר  בחר" variant="outlined" />}
                                     onChange={(e, value) => { setCitycode(value.text) }}
                                 />
-                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Street" onChange={e => { setStreet(e.target.value) }} /></div>
+                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Street"  defaultValue={user.street} onChange={e => { setStreet(e.target.value) }} /></div>
                                 {/* <div class="col-md-6"><input type="text" class="form-control" placeholder="Country"/></div> */}
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Mobile phone" onChange={e => { setMobilephone(e.target.value) }} /></div>
-                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Phone number" onChange={e => { setPhone(e.target.value) }} /></div>
+                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Mobile phone"  defaultValue={user.mobilephone} onChange={e => { setMobilephone(e.target.value) }} /></div>
+                                <div class="col-md-6"><input type="text" class="form-control" placeholder="Phone number"  defaultValue={user.phone} onChange={e => { setPhone(e.target.value) }} /></div>
                             </div>
                             <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button" onClick={e => { saveUser() }}>Save Profile</button></div>
                         </div>
