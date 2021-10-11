@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { HashRouter as Router, Route, Link, Switch, BrowserRouter } from 'react-router-dom'
 import SignUp from './SignUp';
 import swal from 'sweetalert';
+
+import store from './Store';
+import { loginuser,sighnupuser } from './actions';
 export default function Login() {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState([]);//אותו צריך לשים רדיןס
@@ -24,6 +27,8 @@ export default function Login() {
         if (res.data.firstname != null) {
             swal("Hello " + res.data.firstname, "שמחים שחזרת אלינו", "success")
             setUser(res.data);
+            store.dispatch( loginuser(res.data));
+          
         }
         else
             swal({ title: "The email address or password you entered is incorrect", icon: "error" })

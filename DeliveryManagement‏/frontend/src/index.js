@@ -13,39 +13,31 @@ import Ads from './components/Ads'
 import Email from './components/Email'
 import New from './components/N'
 import NavigationBar from './components/NavigationBar'
-ReactDOM.render(
+//
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import reducer from './components/Reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import ReduxThunk from 'redux-thunk';
+const store = createStore(
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(ReduxThunk)
+  )
 
+)
+export default store;
+ReactDOM.render(
+  <Provider store={store}>
   <div>
     <Router>
-      {/* <React.StrictMode>
-        <div className="router">
-          <div className="topnav">
-            <div> <Link to='/'></Link></div>
-            <div><Link to='/SignUp'></Link></div>
-            <div><Link to='/Edit'></Link></div>
-            <div><Link to='/DataTableDemo'></Link></div>
-            <div><Link to='/Profile'></Link></div>
-            <div><Link to='/Ads'></Link></div>‏
-          </div>
-
-        </div>
-      </React.StrictMode> */}
       <Switch>
-        {/* <Route exact path="/" component={Login} /> */}
-        {/* <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/Edit" component={Edit} />
-        <Route exact path="/DataTableDemo" component={DataTableDemo} />
-        <Route exact path="/Profile" component={Profile} /> */}
-        <Route path="/" component={NavigationBar} />
-        <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/Edit" component={Edit} />
-        <Route exact path="/Ads" component={Ads} />
-        <Route exact path="/Email" component={Email} />
-        ‏  <Route exact path="/N" component={New} />
+        <Route path="/" component={NavigationBar} />      
       </Switch>
     </Router>
-  </div >,
-
+  </div >
+  </Provider>,
   document.getElementById('root')
 );
 

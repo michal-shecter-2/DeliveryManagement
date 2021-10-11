@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.16.13",
     "autocomplete": "0.0.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "bootstrap": "^5.1.0",
     "office-ui-fabric-react": "^7.177.1",
     "primeflex": "^3.0.1",
@@ -28,6 +28,8 @@
     "react-transition-group": "^4.4.2",
     "reactjs": "^1.0.0",
     "reactjs-popup": "^2.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.2"
   },
