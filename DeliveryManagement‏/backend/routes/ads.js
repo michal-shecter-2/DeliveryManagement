@@ -1,22 +1,13 @@
 var express = require('express');
 var router = express.Router();
+
 const ads = require("../Model/AdsModel");//חיבור למודל
+
+
 //הצגת כל המודעות
 router.get('/', async (req, res, next) => {
     try {
         const ad = await ads.find({})
-            // .populate([{
-            //     path: "origincity",
-            //     select: {
-            //         name: 1
-            //     }
-            // }])
-            // .populate([{
-            //     path: "destinationcity",
-            //     select: {
-            //         name: 1
-            //     }
-            // }])
             .populate([{
                 path: "usercode",
                 select: {
@@ -26,13 +17,6 @@ router.get('/', async (req, res, next) => {
                     phone: 1,
                     mobilephone: 1
                 }
-                // .populate([{
-                //     path: "deliveryperson",
-                //     select: {
-                //         firstname: 1,
-                //         lastname: 1
-                //     }
-                // }])
             }]);
         res.send(ad)
     }
@@ -49,18 +33,6 @@ router.post('/post', async (req, res, next) => {
         next(err);
     }
 });
-
-//הוספת כמה מודעות בו זמנית
-router.post('/addMany', async (req, res, next) => {
-    try {
-        const ad = await ads.insertMany(req.body);
-        res.send(ad);
-    }
-    catch (err) {
-        res.send(err)
-    }
-});
-
 //מחיקת מודעה
 router.delete('/delete/:id', async (req, res, next) => {
     try {
@@ -82,18 +54,17 @@ router.put('/put/:id', async (req, res, next) => {
         res.send(err)
     }
 });
-// router.get('/login', async (req, res) => {
-//   const { email, password } = req.body;
-//   console.log(email);
-//   console.log(password);
-//   try {
-//     const result = await customers.findOne({ email: email, password: password })
-//     console.log(result)
-//     // if (!result)
-//     res.status(200).send(result)
-//   }
-//   catch (err) {
-//     res.status(404).send(`we can't find the data order which id is ${email} NOT_FOUND`)
-//   }
-// })
+router.post('/find', async (req, res) => {
+  const { usercode } = req.body;
+   console.log(usercode);
+  try {
+    const result = await ads.find({usercode:usercode})
+    console.log(result)
+    // if (!result)
+    res.status(200).send(result)
+  }
+  catch (err) {
+    res.status(404).send(`we can't find  ${usercode} NOT_FOUND`)
+  }
+})
 module.exports = router;
