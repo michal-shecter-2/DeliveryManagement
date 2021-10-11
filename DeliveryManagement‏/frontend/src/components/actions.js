@@ -1,19 +1,22 @@
 
-// import * as actions from '../weather/actionTypes';
-export const cityadd = (data) => ({
-  type: actions.ADD_CITY,
-  paylaod: data
+ import * as actions from './actionTypes';
+
+ //מקבל אוביקט 
+ export const loginuser = (obj) => ({
+  type: actions.LOGIN_USER,
+  obj
 })
-export const removecity = (Key) => (
+
+export const sighnupuser = (obj) => (
   {
-    type: actions.REMOVE_CITY,
-    Key
+    type: actions.SIGHN_UP_USER,
+    obj
 
   }
 )
-export const favoritecity = (obj) => (
-  {
-    type: actions.FAVORITECIRY,
-    obj
-  }
-)
+// export const favoritecity = (obj) => (
+//   {
+//     type: actions.FAVORITECIRY,
+//     obj
+//   }
+// )
