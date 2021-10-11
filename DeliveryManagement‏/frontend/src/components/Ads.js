@@ -23,6 +23,43 @@ export default function Ads() {
     const [options, setOptions] = useState([])
     const [origincity, setOrigincity] = useState("")
     const [destinationcity, setDestinationcity] = useState("")
+    const [date, setDate] = useState()
+    //המשתמש המחוחבר
+    const [user, setUser] = useState(
+        {
+            _id: "61547364745be50c5fbdfe41",
+            firstname: "michal",
+            lastname: "shecter",
+            password: "888999111",
+            email: "mical@gmail.com",
+            phone: "026424926",
+            mobilephone: "0583111544",
+            citycode: "61547364745be50c5fbdfe3b",
+            street: "apple"
+        }
+    )
+    //פרטי החבילה ובעליה
+    const [deliveryDetails, setDeliveryDetails] = useState({
+        _id: "",
+        usercode: {
+            _id: "",
+            firstname: "",
+            lastname: "",
+            email: "",
+            phone: "",
+            mobilephone: ""
+        },
+        origincity: "",
+        destinationcity: "",
+        cost: 0,
+        uploaddate: "",
+        finaldate: "",
+        deliveryperson: "",
+        note: "",
+        size: "",
+        like: 0
+    })
+    const [popupitem, setPopupitem] = useState();
     async function getAllAds() {
         let arr = [];
         await axios.get('http://localhost:4000/ads/')
@@ -38,6 +75,22 @@ export default function Ads() {
 
         return arr;
     }
+    async function Requestelivery() {
+        const res = await axios.post('http://localhost:4000/email/send', {
+
+            deliverysender: deliveryDetails,
+            user: user,
+            date: date
+
+        })
+        if (res.status == 200) {
+
+            swal("excellent ", "Your request has been sent to the sender  If he is interested in a mission he will contact you", "success")
+        }
+        else
+
+            swal({ title: "Opssssss try again", icon: "error" })
+    };
     useEffect(async () => {
         // getAllAds().then(data => setAds(data));
         let getads = await getAllAds();
@@ -46,7 +99,8 @@ export default function Ads() {
         let data = await getAllCities();
         data.map(i => cities.push(i))
         cities.map((i, item) => options.push({ key: item, text: i }))
-        setFilterAds(getads)
+        setFilterAds(getads);
+        console.log(filterAds)
     }, []);
     function convertDay(day) {
         var day = new Date(day);
@@ -78,29 +132,34 @@ export default function Ads() {
         'displayResponsive': setDisplayResponsive
     }
 
-    const onClick = (name, position) => {
+    const onClick = (name, position, item) => {
         dialogFuncMap[`${name}`](true);
 
         if (position) {
             setPosition(position);
+            setDeliveryDetails(item)
         }
     }
 
-    const onHide = (name) => {
+    const onHide = (name, label) => {
         dialogFuncMap[`${name}`](false);
+        if (label == 'Yes')
+            Requestelivery();
     }
 
     const renderFooter = (name) => {
         return (
             <div>
-                <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
-                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
+                <Button label="No" icon="pi pi-times" onClick={() => onHide(name, "No")} className="p-button-text" />
+                <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name, "Yes")} autoFocus />
             </div>
         );
     }
 
     return (
         <div>
+            <h1>{date}</h1>
+
             <div class="container mt-5 mb-5">
                 <div class="row">
                     <div class="col-md-12">
@@ -146,19 +205,23 @@ export default function Ads() {
                                         <div><i class="fa fa-calendar-o"></i><span class="ml-2">until: {convertDay(item.finaldate)}</span></div>
                                         <div class="d-flex flex-row align-items-center">
                                             <div class="profiles">
-                                                <Button label="Show" icon="pi pi-external-link" onClick={() => onClick('displayResponsive')} />
-                                                <Dialog header="Details" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
-                                                    <h5 class="mt-2"><b>Delivery from {item.origincity} to {item.destinationcity}</b></h5>
-                                                    <h5 class="mt-2"><b>payment:{item.cost}, {item.size} devilery</b></h5>
-                                                    <br />
-                                                    <h5 class="mt-2"><b>sender's details‏:</b></h5>
-                                                    <h5 class="mt-2">{item.usercode.firstname} {item.usercode.lastname}</h5>
-                                                    <h5 class="mt-2">phone: {item.usercode.phone}</h5>
-                                                    <h5 class="mt-2">mobilephone: {item.usercode.mobilephone}</h5>
-                                                    <h5 class="mt-2">email: {item.usercode.email}</h5>
-                                                    <label for="birthdaytime">Interested in picking up the shipment on date and time:</label>
-                                                    <input type="datetime-local" id="birthdaytime" name="birthdaytime" />
-                                                </Dialog></div>
+                                                <Button label="Show" icon="pi pi-external-link" onClick={() => { setPopupitem(item); onClick('displayResponsive', position, item) }} />
+                                                {popupitem != null ?
+                                                    <Dialog header="Details" visible={displayResponsive} onHide={() => onHide('displayResponsive')} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter('displayResponsive')}>
+                                                        <h5 class="mt-2"><b>Delivery from {popupitem.origincity} to {popupitem.destinationcity}</b></h5>
+                                                        <h5 class="mt-2"><b>payment:{popupitem.cost}, {popupitem.size} devilery</b></h5>
+                                                        <br />
+                                                        <h5 class="mt-2"><b>sender's details‏:</b></h5>
+                                                        <h5 class="mt-2">{popupitem.usercode.firstname} {popupitem.usercode.lastname}</h5>
+                                                        <h5 class="mt-2">phone: {popupitem.usercode.phone}</h5>
+                                                        <h5 class="mt-2">mobilephone: {popupitem.usercode.mobilephone}</h5>
+                                                        <h5 class="mt-2">email: {popupitem.usercode.email}</h5>
+                                                        <label for="birthdaytime">Interested in picking up the shipment on date and time:</label>
+                                                        <input type="datetime-local" id="birthdaytime" name="birthdaytime" />
+                                                    </Dialog>
+                                                    : ""}
+
+                                            </div>
                                         </div>
                                     </div>
 
