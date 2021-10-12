@@ -17,7 +17,7 @@ const sendEmail = async (mailDetails) => {
         // subject: `Hi: ${mailDetails.name}, email: ${mailDetails.email}`,
         subject: `We have found a delivery person for you!‏‏`,
         text:
-            ` Hello ${mailDetails.deliverysender.usercode.firstname} Michal
+            ` Hello ${mailDetails.deliverysender.usercode.firstname} Michal!
        Ayala wants to pick up your package on Wednesday at 5 p.m
        Please contact by this email njvnfjvnjf@gmail.com
        See you next time
