@@ -8,7 +8,6 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
-import ReactDOM from 'react-dom';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import swal from 'sweetalert';
@@ -164,28 +163,32 @@ export default function Ads() {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-flex flex-row justify-content-between align-items-center filters">
-                            <h6>Showing 291 tasks</h6>
+                            <h6>Showing {filterAds.length} tasks</h6>
                             <div class="right-sort">
                                 <div class="sort-by"><span class="mr-1">Sort by:</span>
                                     <div className="autocomplate">
-                                        <Autocomplete
-                                            className="origincity"
-                                            id="origin"
-                                            options={options}
-                                            getOptionLabel={(option) => option.text}
-                                            style={{ width: 300 }}
-                                            renderInput={(params) => <TextField {...params} label=" עיר מוצא" variant="outlined" />}
-                                            onChange={(e, value) => { onChangeOrigincity(value) }}
-                                        />
-                                        <Autocomplete
-                                            className="destinationcity"
-                                            id="destination"
-                                            options={options}
-                                            getOptionLabel={(option) => option.text}
-                                            style={{ width: 300 }}
-                                            renderInput={(params) => <TextField {...params} label=" עיר יעד" variant="outlined" />}
-                                            onChange={(e, value) => { onChangedestinationcity(value) }}
-                                        />
+                                        <div class="City of origin">
+                                            <Autocomplete
+                                                className="origincity"
+                                                id="origin"
+                                                options={options}
+                                                getOptionLabel={(option) => option.text}
+                                                style={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} label="City of origin" variant="outlined" />}
+                                                onChange={(e, value) => { onChangeOrigincity(value) }}
+                                            />
+                                        </div>
+                                        <div className="Destination city">
+                                            <Autocomplete
+                                                className="destinationcity"
+                                                id="destination"
+                                                options={options}
+                                                getOptionLabel={(option) => option.text}
+                                                style={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} label="Destination city" variant="outlined" />}
+                                                onChange={(e, value) => { onChangedestinationcity(value) }}
+                                            />
+                                        </div>
                                     </div>
                                     <i class="fa fa-angle-down ml-1"></i>
                                     <button class="btn btn-outline-dark btn-sm ml-3 filter" type="button" onClick={(e) => { onClickCity() }}>Filters&nbsp;<i class="fa fa-flask"></i></button></div>
@@ -200,7 +203,7 @@ export default function Ads() {
                             <div class="col-md-4">
                                 <div class="p-card bg-white p-2 rounded px-3">
                                     <div class="d-flex align-items-center credits"><img src="https://i.imgur.com/hlz6G90.png" width="16px" /><span class="text-black-50 ml-2">1 credits</span></div>
-                                    <h5 class="mt-2">Delivery from {item.origincity} to {item.destinationcity}</h5><span class="badge badge-danger py-1 mb-2">Marketing &amp; Sales</span><span class="d-block mb-5">cost:{item.cost}$</span><span class="d-block mb-5">delivery size:{item.size}</span>
+                                    <h5 class="mt-2">Delivery from {item.origincity} to {item.destinationcity}</h5><span class="d-block mb-5">cost:{item.cost}$</span><span class="d-block mb-5">delivery size:{item.size}</span>
                                     <div class="d-flex justify-content-between stats">
                                         <div><i class="fa fa-calendar-o"></i><span class="ml-2">until: {convertDay(item.finaldate)}</span></div>
                                         <div class="d-flex flex-row align-items-center">
@@ -229,7 +232,7 @@ export default function Ads() {
                             </div>
                         )
                         :
-                        <h2>"אין משלוחים המתאימים לדרישותיך"</h2>
+                        <h2>"There are no deliveries that are right for you"</h2>
                     }
                 </div>
                 <div class="d-flex justify-content-end text-right mt-2">

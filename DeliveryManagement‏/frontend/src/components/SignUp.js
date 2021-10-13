@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Pet from './Pet'
 import './SignUp.css'
+import './Ads';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import swal from 'sweetalert';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { IComboBoxStyles, SelectableOptionMenuItemType, IButtonStyles, } from '@fluentui/react';
 import { ComboBox, findIndex, IComboBox, IComboBoxOption, on, htmlElementProperties, Checkbox, ChoiceGroupBase } from 'office-ui-fabric-react';
 import TextField from '@material-ui/core/TextField';
+import { AutoComplete } from 'primereact/autocomplete';
+import { Link } from '@material-ui/core';
 export default function SignUp() {
     const [cities, setCities] = useState([]);
     const [user, setUser] = useState({ firstname: "", lastname: "", password: "", email: "", phone: "", mobilephone: "", citycode: "", street: "" })
@@ -20,7 +22,8 @@ export default function SignUp() {
     const [citycode, setCitycode] = useState({ citycode: "" })
     const [street, setStreet] = useState({ street: "" })
     const [options, setOptions] = useState([])
-
+    const [countries, setCountries] = useState(null);
+    const [filteredCountries, setFilteredCountries] = useState(null);
     async function getAllCities() {
         let arr = [];
         await axios.post('https://countriesnow.space/api/v0.1/countries/cities', {
@@ -30,7 +33,14 @@ export default function SignUp() {
 
         return arr;
     }
-
+    const searchCountry = (event) => {
+        setTimeout(() => {
+            let results = countries.filter((country) => {
+                return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+            });
+            setFilteredCountries(results);
+        }, 250);
+    }
     async function addUser() {
         const res = await axios.post('http://localhost:4000/users/post', {
             firstname: firstname,
@@ -44,7 +54,8 @@ export default function SignUp() {
         })
         if (res.status == 200) {
             setUser(res.data);
-            swal("wellcom " + res.data.firstname, "good luck in your job", "success")
+            swal("wellcom " + res.data.firstname, "good luck in your job", "success").then(<a class="nav-link" href="#/Ads">דף הבית</a>)
+            // swal.onClick(<a class="nav-link" href="#/Ads">דף הבית</a>)
         }
         else
 
@@ -97,12 +108,11 @@ export default function SignUp() {
                                             </div>
                                             <div class="form-group mb-3">
                                                 <Autocomplete
-                                                    className="priority"
-                                                    id="Food"
+                                                    class="form-control rounded-pill border-0 shadow-sm px-4"
                                                     options={options}
                                                     getOptionLabel={(option) => option.text}
-                                                    style={{ width: 300 }}
-                                                    renderInput={(params) => <TextField {...params} label=" עיר  בחר" variant="outlined" />}
+                                                    style={{ width: 350, height: 40 }}
+                                                    renderInput={(params) => <TextField {...params} label="city" variant="outlined" />}
                                                     onChange={(e, value) => { setCitycode(value.text) }}
                                                 />
                                             </div>
@@ -121,8 +131,6 @@ export default function SignUp() {
 
                         </div>
                     </div>
-
-
                 </div>
             </div>
 

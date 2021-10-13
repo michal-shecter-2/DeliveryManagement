@@ -31,3 +31,8 @@ body {
     color: #682773;
     cursor: pointer
 }
+
+.p-password input {
+    width: 15rem;
+}
+   
