@@ -12,12 +12,36 @@ const mongoose = require('mongoose');
 // <<<<<<< HEAD
 const uri = "mongodb://localhost:27017/Deliveries";//קישור למונגודיבי
 mongoose.set('debug', true);
+const { sendEmail } = require('./sendemail')
+ const  {smartagent}  = require('./agent');
 
+ const ads = require("./Model/AdsModel");
 cron.schedule('* * * * *  ', () => {
   //כאן נקרא לפונקציה שתהיה בAGENT
+  // smartagent();
+ getallads();
   console.log('running a task every one minutes');
 });
 
+async function getallads()  {
+  try {
+      const ad = await ads.find({})
+          .populate([{
+              path: "usercode",
+              select: {
+                  firstname: 1,
+                  lastname: 1,
+                  email: 1,
+                  phone: 1,
+                  mobilephone: 1
+              }
+          }]);
+     console.log(ad);
+  }
+  catch (arr) {
+     console.log(err);
+  }
+}
 
 
 
