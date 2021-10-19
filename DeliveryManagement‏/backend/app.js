@@ -30,7 +30,7 @@ const adsRouter = require('./routes/ads');
 const citiesRouter = require('./routes/cities');
 const usersRouter = require('./routes/users');
 const sendemailRouter = require('./routes/email');
-
+const agentRouter = require('./routes/agent');
 app.use(logger('dev'));
 app.use(express.json());//מאפשר לקבל אוביקטים מסוג json
 app.use(express.urlencoded({ extended: false }));
@@ -39,7 +39,7 @@ app.use('/ads', adsRouter);
 app.use('/cities', citiesRouter);
 app.use('/users', usersRouter);
 app.use('/email', sendemailRouter);
-
+app.use('/agent', agentRouter)
 
 app.use(cors(options))
 // error handler
