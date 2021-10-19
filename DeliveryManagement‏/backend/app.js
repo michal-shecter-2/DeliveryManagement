@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-
+const cron = require('node-cron');
 const cors = require('cors');
 const app = express();
 const port = 4000;
@@ -12,6 +12,11 @@ const mongoose = require('mongoose');
 // <<<<<<< HEAD
 const uri = "mongodb://localhost:27017/Deliveries";//קישור למונגודיבי
 mongoose.set('debug', true);
+
+cron.schedule('* * * * *  ', () => {
+  //כאן נקרא לפונקציה שתהיה בAGENT
+  console.log('running a task every one minutes');
+});
 
 
 
