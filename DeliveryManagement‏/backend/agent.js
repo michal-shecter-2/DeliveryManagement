@@ -12,25 +12,25 @@ const smartagent = async () => {
 console.log("---------------------------------------------------------");
     const alladds=[];
 const allagents=[];
-async function getallads()  {
-    try {
-        const ad = await ads.find({})
-            .populate([{
-                path: "usercode",
-                select: {a
-                    firstname: 1,
-                    lastname: 1,
-                    email: 1,
-                    phone: 1,
-                    mobilephone: 1
-                }
-            }]);
-       console.log(ad);
-    }
-    catch (arr) {
-       console.log(err);
-    }
+   async function getallads()  {
+  try {
+      const ad = await ads.find({})
+          .populate([{
+              path: "usercode",
+              select: {
+                  firstname: 1,
+                  lastname: 1,
+                  email: 1,
+                  phone: 1,
+                  mobilephone: 1
+              }
+          }]);
+     console.log(ad);
   }
+  catch (arr) {
+     console.log(err);
+  }
+}
      
     //   async function getallagents() {
     //     try {
