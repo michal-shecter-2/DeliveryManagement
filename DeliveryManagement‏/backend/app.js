@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+
 const cors = require('cors');
 const app = express();
 const port = 4000;
@@ -11,6 +12,9 @@ const mongoose = require('mongoose');
 // <<<<<<< HEAD
 const uri = "mongodb://localhost:27017/Deliveries";//קישור למונגודיבי
 mongoose.set('debug', true);
+
+
+
 
 //const uri = "mongodb://localhost:27017/Events";
 // >>>>>>> 42d41d2e39b66a8d7bc5e01884aaee7ef21a2350

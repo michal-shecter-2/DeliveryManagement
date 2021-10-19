@@ -14,6 +14,7 @@
     "autocomplete": "0.0.1",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.0",
+    "node-cron": "^3.0.0",
     "office-ui-fabric-react": "^7.177.1",
     "primeflex": "^3.0.1",
     "primeicons": "^4.1.0",
