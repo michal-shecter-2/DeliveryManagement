@@ -4,7 +4,17 @@ const agents = require("../Model/AgentModel");//חיבור למודל
 //הצגת כל הסוכנים
 router.get('/', async (req, res, next) => {
     try {
-        const agent = await agents.find({});
+        const agent = await agents.find({})
+            .populate([{
+                path: "usercode",
+                select: {
+                    firstname: 1,
+                    lastname: 1,
+                    email: 1,
+                    phone: 1,
+                    mobilephone: 1
+                }
+            }]);
         res.send(agent);
     }
     catch (arr) {

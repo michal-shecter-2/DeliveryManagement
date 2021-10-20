@@ -13,38 +13,35 @@ const mongoose = require('mongoose');
 const uri = "mongodb://localhost:27017/Deliveries";//קישור למונגודיבי
 mongoose.set('debug', true);
 const { sendEmail } = require('./sendemail')
- const  {smartagent}  = require('./agent');
-
- const ads = require("./Model/AdsModel");
-cron.schedule('* * * * *  ', () => {
+const { smartagent } = require('./agent');
+const ads = require("./Model/AdsModel");//חיבור למודל
+cron.schedule('* * * * *  *', () => {
   //כאן נקרא לפונקציה שתהיה בAGENT
-  // smartagent();
- getallads();
+  smartagent();
+  //getallads();
   console.log('running a task every one minutes');
 });
 
-async function getallads()  {
+
+async function getallads() {
   try {
-      const ad = await ads.find({})
-          .populate([{
-              path: "usercode",
-              select: {
-                  firstname: 1,
-                  lastname: 1,
-                  email: 1,
-                  phone: 1,
-                  mobilephone: 1
-              }
-          }]);
-     console.log(ad);
+    const ad = await ads.find({})
+    // .populate([{
+    //   path: "usercode",
+    //   select: {
+    //     firstname: 1,
+    //     lastname: 1,
+    //     email: 1,
+    //     phone: 1,
+    //     mobilephone: 1
+    //   }
+    // }]);
+    console.log(ad);
   }
   catch (arr) {
-     console.log(err);
+    console.log(err);
   }
 }
-
-
-
 //const uri = "mongodb://localhost:27017/Events";
 // >>>>>>> 42d41d2e39b66a8d7bc5e01884aaee7ef21a2350
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
