@@ -8,7 +8,7 @@ import SignUp from './SignUp';
 import AddShipping from './AddShipping';
 import Edit from './Edit';
 import Ads from './Ads'
-
+import Agent from './Agent';
 
 export default function NavigationBar() {
     return (
@@ -20,16 +20,18 @@ export default function NavigationBar() {
                         <li class="nav-item"> <a class="nav-link" href="#/Edit">אזור אישי</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#/Ads">דף הבית</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="#/AddShipping">הוספת משלוח</a> </li>
-                        <li class="nav-item"> <a class="nav-link" href="#/c">סוכן חכם למייל</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#/Agent">סוכן חכם למייל</a> </li>
                     </ul>
                 </div>
             </nav>
-            <Switch> 
-        <Route exact path="/" component={Login} />
-        <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/Edit" component={Edit} />
-        <Route exact path="/Ads" component={Ads} />
-        <Route exact path="/AddShipping" component={AddShipping}/>
-    </Switch>
-    </div>
-)}
+            <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/SignUp" component={SignUp} />
+                <Route exact path="/Edit" component={Edit} />
+                <Route exact path="/Ads" component={Ads} />
+                <Route exact path="/AddShipping" component={AddShipping} />
+                <Route exact path="/Agent" component={Agent} />
+            </Switch>
+        </div>
+    )
+}

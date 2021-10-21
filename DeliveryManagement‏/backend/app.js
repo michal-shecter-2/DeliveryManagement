@@ -15,7 +15,7 @@ mongoose.set('debug', true);
 const { sendEmail } = require('./sendemail')
 const { smartagent } = require('./agent');
 const ads = require("./Model/AdsModel");//חיבור למודל
-cron.schedule('* * * * *  *', () => {
+cron.schedule('* * * * *  ', () => {
   //כאן נקרא לפונקציה שתהיה בAGENT
   smartagent();
   //getallads();
