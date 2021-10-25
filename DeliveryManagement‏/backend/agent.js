@@ -8,6 +8,7 @@ const { sendEmail } = require("./sendemail");
 //הצגת כל המודעות
 var ads = require("./Model/AdsModel");//חיבור למודל
 const agents = require("./Model/AgentModel");//חיבור למודל
+
 const smartagent = async () => {
     console.log("---------------------------------------------------------");
     const alladds = [];
@@ -39,7 +40,17 @@ async function getallads() {
 }
 async function getallagents() {
     try {
-        const agent = await agents.find({});
+        const agent = await agents.find({})
+            .populate([{
+                path: "usercode",
+                select: {
+                    firstname: 1,
+                    lastname: 1,
+                    email: 1,
+                    phone: 1,
+                    mobilephone: 1
+                }
+            }]);
         allagents = agent;
         allagents.map(item => console.log('ggggg---', item))
     }
@@ -50,10 +61,13 @@ async function getallagents() {
 // מחפשים מודעות שעונות לסוכן חכם של המתמש במידה והמערך שחוזר אלינו אינו ריק נעשה קשרי גומלין ונשלח לו מייל
 async function FilterAndSend() {
     allagents.map(item => {
-        let temparr = filters(item.origincity, item.destinationcity, item.price);
+        let temparr = alladds.filter(i => i.origincity == item.origincity && i.destinationcity == item.destinationcity && i.cost >= item.price);
         console.log("temparr-----", temparr);
+        // let temparr = filters(item.origincity, item.destinationcity, item.price);
+        // console.log("temparr-----", temparr);
         // console.log(item.usercode);
         if (temparr != null) {
+            console.log(item.usercode.firstname);
             sendEmail({
                 ads: temparr[0],
                 user: item.usercode
@@ -62,12 +76,23 @@ async function FilterAndSend() {
         }
     })
 }
+
 //פונקציה שתפלטר את המודעות על פי:עיר מוצא, יעד ומחיר
 async function filters(origincity, destinationcity, price) {
     //מודעות שתואמות למאפייני סוכן אחד
-    let tmp = await alladds.filter(i => i.origincity == origincity && i.destinationcity == destinationcity && i.cost >= price);
-    return tmp
+    let tmp = await alladds.filter(i => i.origincity == origincity && i.destinationcity == destinationcity && i.cost >= price)
+    console.log("temparr-----", tmp);
+    return tmp;
 }
+// let temparr = [];
+// const myPromise = new Promise((resolve, reject) => {
+
+//     let a = filters("Bnei Brak", "Jerusalem", 40);
+//     resolve(a);
+//     reject('error');
+// });
+
+
 
 module.exports = {
     smartagent

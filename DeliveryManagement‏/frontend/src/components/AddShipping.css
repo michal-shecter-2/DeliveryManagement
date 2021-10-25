@@ -8,7 +8,17 @@
   background-size: cover;
   background-position: center center;
 } */
-
+/* 
 bady{
     background-color: lawngreen;
+} */
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+    background-image:url('../components/login.jpg');
+  background-size: cover;
+  background-position: center center;
 }
