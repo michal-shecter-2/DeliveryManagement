@@ -27,28 +27,39 @@ export default function AddShipping() {
     const [note, setNote] = useState("");
     const [size, setSize] = useState("");
     async function addAds() {
-        const res = await axios.post('localhost:4000/ads/post', {
-            // usercode: usercode,
-            // origincity: origincity,
-            // destinationcity: destinationcity,
-            // cost: cost,
-            // uploaddate: uploaddate,
-            // finaldate: finaldate,
-            // note: note,
-            // size: size
-            "usercode": "615e371b9187ad41b41bc196",
-            "origincity": "Jerusalem",
-            "destinationcity": "Jerusalem",
-            "cost": 30,
-            "uploaddate": "2021-10-01T07:14:23.000Z",
-            "finaldate": "2021-10-25T07:14:23.000Z",
-            "note": "fragile",
-            "size": "big",
-            "like": 0
+        const res = await axios.post('http://localhost:4000/ads/post', {
+            usercode: usercode,
+            origincity: origincity,
+            destinationcity: destinationcity,
+            cost: cost,
+            uploaddate: uploaddate,
+            finaldate: finaldate,
+            note: note,
+            size: size
         })
         if (res.status == 200) {
             setUser(res.data);
             swal("wellcom ", "good luck in your job", "success")
+        }
+        else
+
+            swal({ title: "Opssssss try again", icon: "error" })
+    };
+    async function addUser() {
+        const res = await axios.post('http://localhost:4000/users/post', {
+            firstname: "aa",
+            lastname: "aa",
+            password: "aa",
+            email: "aa",
+            phone: "aa",
+            mobilephone: "aa",
+            citycode: "aa",
+            street: "aa"
+        })
+        if (res.status == 200) {
+            setUser(res.data);
+            swal("wellcom " + res.data.firstname, "good luck in your job", "success").then(<a class="nav-link" href="#/Ads">דף הבית</a>)
+            // swal.onClick(<a class="nav-link" href="#/Ads">דף הבית</a>)
         }
         else
 
@@ -92,7 +103,7 @@ export default function AddShipping() {
                                                     options={options}
                                                     getOptionLabel={(option) => option.text}
                                                     style={{ width: 300 }}
-                                                    renderInput={(params) => <TextField {...params} label=" בחר עיר מוצא" variant="outlined" />}
+                                                    renderInput={(params) => <TextField {...params} label="choose destinationcity" variant="outlined" />}
                                                     onChange={(e, value) => { SetOrigincity(value.text) }}
                                                 />
                                             </div>
@@ -103,27 +114,22 @@ export default function AddShipping() {
                                                     options={options}
                                                     getOptionLabel={(option) => option.text}
                                                     style={{ width: 300 }}
-                                                    renderInput={(params) => <TextField {...params} label=" בחר עיר יעד" variant="outlined" />}
+                                                    renderInput={(params) => <TextField {...params} label=" choose origincity" variant="outlined" />}
                                                     onChange={(e, value) => { setDestinationcity(value.text) }}
                                                 />
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="birthdaytime">Until Date:</label>
+                                                <input type="datetime-local" id="birthdaytime" name="birthdaytime" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setFinaldate(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
                                                 <input id="Price" type="number" placeholder="Price" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" min="0" onChange={e => { setCost(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="birthdaytime">תאריך:</label>
-                                                <input type="datetime-local" id="birthdaytime" name="birthdaytime" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setFinaldate(e.target.value) }} />
-                                            </div>
-                                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
-                                                <input placeholder="Select date" type="text" id="example" class="form-control" />
-                                                <label for="example">Try me...</label>
-                                                <i class="fas fa-calendar input-prefix" tabindex='0'></i>
+                                                <input id="inputMobilePhone" type="phone" placeholder="delivert size " required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setSize(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
                                                 <input id="inputFirstName" type="name" placeholder="Remarks" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setNote(e.target.value) }} />
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <input id="inputMobilePhone" type="phone" placeholder="גודל החבילה" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setSize(e.target.value) }} />
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm" onClick={e => addAds()}>Sign Up</button>
                                         </form>

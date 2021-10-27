@@ -17,6 +17,7 @@ const smartagent = async () => {
     await getallagents();
     await FilterAndSend()
 }
+//שליפת כל המודעות
 async function getallads() {
     try {
         const ad = await ads.find({})
@@ -38,6 +39,7 @@ async function getallads() {
         console.log(err);
     }
 }
+//שליפת כל הסוכנים הקיימים
 async function getallagents() {
     try {
         const agent = await agents.find({})
@@ -58,20 +60,23 @@ async function getallagents() {
         console.log(err);
     }
 };
-// מחפשים מודעות שעונות לסוכן חכם של המתמש במידה והמערך שחוזר אלינו אינו ריק נעשה קשרי גומלין ונשלח לו מייל
+
+// מחפשים מודעות שעונות לסוכן חכם של המשתמש במידה והמערך שחוזר אלינו אינו ריק נעשה קשרי גומלין ונשלח לו מייל
 async function FilterAndSend() {
     allagents.map(item => {
-        let temparr = alladds.filter(i => i.origincity == item.origincity && i.destinationcity == item.destinationcity && i.cost >= item.price);
+        let temparr = alladds.filter(i => i.origincity == item.origincity && i.destinationcity == item.destinationcity && i.cost >= item.price && item.finaldate.getDay() >= Date.now(-2).getDay());
         console.log("temparr-----", temparr);
         // let temparr = filters(item.origincity, item.destinationcity, item.price);
-        // console.log("temparr-----", temparr);
+        // console.log("temparr--", temparr);
         // console.log(item.usercode);
         if (temparr != null) {
-            console.log(item.usercode.firstname);
-            sendEmail({
-                ads: temparr[0],
-                user: item.usercode
+            temparr.map(i => {
+                sendEmail({
+                    ads: i,
+                    user: item.usercode
+                })
             })
+
             //צריך לשלוח לפונקציה מודעה -מודעה על מנת שילחו מייל לקוד משתמש של הסוכן   
         }
     })
