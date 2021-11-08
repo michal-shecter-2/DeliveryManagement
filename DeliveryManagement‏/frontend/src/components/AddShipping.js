@@ -129,7 +129,7 @@ export default function AddShipping() {
                                                 <input id="inputMobilePhone" type="phone" placeholder="delivert size " required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setSize(e.target.value) }} />
                                             </div>
                                             <div class="form-group mb-3">
-                                                <input id="inputFirstName" type="name" placeholder="Remarks" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setNote(e.target.value) }} />
+                                                <input id="Remarks" type="name" placeholder="Remarks" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4" onChange={e => { setNote(e.target.value) }} />
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm" onClick={e => addAds()}>Sign Up</button>
                                         </form>

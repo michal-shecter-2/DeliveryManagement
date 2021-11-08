@@ -35,4 +35,8 @@ body {
     flex-wrap: wrap;
     /* margin-right: 2vw; 
     margin-left: 47vw; */
-}            
+}  
+#price{
+    background-color:initial;
+
+}          
